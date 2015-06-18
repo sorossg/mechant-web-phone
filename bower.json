@@ -1,0 +1,27 @@
+{
+  "name": "merchant-web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Casumoto/merchant-web",
+  "authors": [
+    "casumoto <sysangtiger@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "i18next": "~1.9.0",
+    "momentjs": "~2.10.3",
+    "jquery-ui": "~1.11.4",
+    "bootstrap": "~3.3.4",
+    "jquery-ui-touch-punch": "*",
+    "lodash": "~3.9.3",
+    "angularjs": "~1.4.1",
+    "angular-route": "~1.4.1",
+    "requirejs": "~2.1.18"
+  }
+}
