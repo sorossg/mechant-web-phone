@@ -44,7 +44,7 @@
 
   .date {
     .text-orange();
-    .text-size-14pt();
+    .text-size-20pt();
     height: 100px;
     p {
       margin: 0;
@@ -53,7 +53,7 @@
     }
   }
 
-  .today{
+  .today {
     .padding-side-none();
     height: 100%;
     text-align: left;
@@ -63,5 +63,18 @@
     .padding-side-none();
     height: 100%;
     text-align: right;
+  }
+}
+
+.date_anchor {
+  .text-orange();
+  .text-size-14pt();
+  height: 20px;
+
+  p {
+    line-height: 20px;
+    background-color: @bright-orange-color;
+    border-top: 1px solid @bright-gray-color;
+    border-bottom: 1px solid @bright-gray-color;
   }
 }
