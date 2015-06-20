@@ -2,9 +2,18 @@
 @import "less/definitions.less";
 @import "less/appointment.less";
 
+html, body, #container  {
+  width: 100%;
+  height: 100%;
+}
 
 body {
+  .font-helvetica();
+  .text-size-14pt();
+}
 
+#container {
+  position: relative;
 }
 
 button:focus {
@@ -14,4 +23,8 @@ button:focus {
 button {
   background-color: transparent;
   border: none;
+}
+
+p {
+  margin: 0;
 }
