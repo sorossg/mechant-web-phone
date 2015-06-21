@@ -5,7 +5,9 @@
     "type": "git",
     "url": ""
   },
-  "dependencies": {},
+  "dependencies": {
+    "q": "^1.4.1"
+  },
   "engine": "node 0.10.37",
   "devDependencies": {
     "grunt": "^0.4.5",

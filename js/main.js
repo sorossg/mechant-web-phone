@@ -27,7 +27,11 @@ var app = null;
     }]);
 
     var manifest = [
+        'js/common/Configuration',
+
         'js/services/i18nService',
+        'js/services/AjaxService',
+        'js/services/ShopResourceService',
 
         'js/appointment/AppointmentController.js'
     ];
