@@ -13,24 +13,26 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
     this.$secondWeek = this.$weekList.find("#second_week");
     this.$thirdWeek = this.$weekList.find("#third_week");
     this.$weekList.appendTo(self.$weekDays);
+    this.slider = {};
 
     this.renderWeekDays = function () {
         this.__populateDateForThreeWeekLists();
-        this.transformToSlider();
+        this.renderSlider();
     };
 
-    this.transformToSlider = function () {
-        $('.bxslider').bxSlider({
+    this.renderSlider = function () {
+        self.slider = $('.bxslider').bxSlider({
             swipeThreshold: 100,
             controls: false,
-            startSlide:1,
+            startSlide: 1,
+            pager: false,
             onSlideAfter: this.__onSlideAfterHandler.bind(this)
         });
     };
 
     this.__calculateDateRangeForThreeWeeks = function (showing_week_number) {
-        var startDate = moment().week(showing_week_number - 1);
-        var endDate = moment().week(showing_week_number + 1).add(6, "days");
+        var startDate = moment().week(showing_week_number - 1).startOf("week");
+        var endDate = moment().week(showing_week_number + 1).endOf("week");
         var dateRange = [];
         for (var i = startDate; (i.isBefore(endDate)) || (i.isSame(endDate)); i.add(1, "days")) {
             dateRange.push(moment(i));
@@ -38,8 +40,9 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
         return dateRange
     };
 
-    this.__populateDateForWeek = function ($weekElement, startIndexOfDayRange) {
+    this.__populateDateForWeek = function ($weekElement, $startIndexOfDayRange) {
         var date;
+        var startIndexOfDayRange = $startIndexOfDayRange;
         var dayRange = this.__calculateDateRangeForThreeWeeks(this.showing_week_number);
 
         $weekElement.find('li').each(function () {
@@ -57,9 +60,14 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
     };
 
     this.__onSlideAfterHandler = function ($slideElement, oldIndex, newIndex) {
-        this.__increaseShowingWeek();
-        //this.__populateDateForWeek($slideElement.prev(), 0);
-        //this.__populateDateForWeek($slideElement.next(), 14);
+        if (this.__isDecreaseDirection(oldIndex, newIndex)) {
+            this.__decreaseShowingWeek();
+        } else {
+            this.__increaseShowingWeek();
+        }
+        this.__populateDateForThreeWeekLists();
+        this.slider.destroySlider();
+        this.renderSlider();
     };
 
     this.__increaseShowingWeek = function () {
@@ -68,5 +76,10 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
 
     this.__decreaseShowingWeek = function () {
         this.showing_week_number--;
+    };
+
+    this.__isDecreaseDirection = function (oldIndex, newIndex) {
+        return (oldIndex == 1 && newIndex == 0) || (oldIndex == 0 && newIndex == 2) || (oldIndex == 2 && newIndex == 1)
+
     }
 }]);
