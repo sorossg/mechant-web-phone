@@ -1,6 +1,12 @@
 'use strict';
 app.controller('AppointmentController',
-    ['$scope', function ($scope) {
-        $scope.data = {};
+    ['$scope',
+        'WeekdaysService',
+        function ($scope,
+                  WeekdaysService
+        ) {
 
-    }]);
+            $scope.data = {};
+
+            WeekdaysService.renderWeekDays();
+        }]);

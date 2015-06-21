@@ -21,6 +21,7 @@
     "lodash": "~3.9.3",
     "angularjs": "~1.4.1",
     "angular-route": "~1.4.1",
-    "requirejs": "~2.1.18"
+    "requirejs": "~2.1.18",
+    "bxslider-4": "~4.2.5"
   }
 }

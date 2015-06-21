@@ -33,10 +33,12 @@ var app = null;
         'js/services/AjaxService',
         'js/services/ShopResourceService',
 
-        'js/appointment/AppointmentController.js'
+        'js/appointment/AppointmentController.js',
+        'js/appointment/WeekdaysService.js'
     ];
 
     var templates = [
+        'templates/week_list.html'
     ];
 
     app.run(["$templateRequest","$templateCache",function ($templateRequest, $templateCache) {
