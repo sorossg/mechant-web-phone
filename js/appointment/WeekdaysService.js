@@ -9,9 +9,9 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
     this.showing_week_number = moment().week();
     this.$weekDays = $("#week_days");
     this.$weekList = $(weekListTemplate);
-    this.$firstWeek = this.$weekList.find("#first_week");
-    this.$secondWeek = this.$weekList.find("#second_week");
-    this.$thirdWeek = this.$weekList.find("#third_week");
+    this.$firstWeek = this.$weekList.find(".first_week");
+    this.$secondWeek = this.$weekList.find(".second_week");
+    this.$thirdWeek = this.$weekList.find(".third_week");
     this.$weekList.appendTo(self.$weekDays);
     this.slider = {};
 
@@ -26,6 +26,7 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
             controls: false,
             startSlide: 1,
             pager: false,
+            speed: 300,
             onSlideAfter: this.__onSlideAfterHandler.bind(this)
         });
     };
@@ -65,9 +66,20 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
         } else {
             this.__increaseShowingWeek();
         }
-        this.__populateDateForThreeWeekLists();
-        this.slider.destroySlider();
-        this.renderSlider();
+        this.__rePopulateDateForNextAndPrevWeek($slideElement);
+    };
+
+    this.__rePopulateDateForNextAndPrevWeek = function ($slideElement) {
+        var nextWeekOrder = $slideElement.next().attr("data-order");
+        var prevWeekOrder = $slideElement.prev().attr("data-order");
+
+        $("[data-order='"+ nextWeekOrder+"']").each(function () {
+            self.__populateDateForWeek($(this), 14);
+        });
+
+        $("[data-order='"+ prevWeekOrder+"']").each(function () {
+            self.__populateDateForWeek($(this), 0);
+        });
     };
 
     this.__increaseShowingWeek = function () {
