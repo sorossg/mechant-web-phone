@@ -11,6 +11,7 @@ var app = null;
     app.config(['$routeProvider',function ($routeProvider) {
         $routeProvider
             .when('/', {controller: 'AppointmentController', templateUrl: 'templates/appointment.html'})
+            .when('/NewAppointment', {controller: 'NewAppointmentController', templateUrl: 'templates/new_appointment.html'})
             .otherwise({
                 redirectTo: '/'
             });
