@@ -2,8 +2,10 @@
 app.controller('AppointmentController',
     ['$scope',
         'WeekdaysService',
+        'PopupService',
         function ($scope,
-                  WeekdaysService
+                  WeekdaysService,
+                  PopupService
         ) {
 
             $scope.data = {};

@@ -17,10 +17,11 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
 
     this.renderWeekDays = function () {
         this.__populateDateForThreeWeekLists();
-        this.renderSlider();
+        this.__renderSlider();
+        this.__emphasizeToday();
     };
 
-    this.renderSlider = function () {
+    this.__renderSlider = function () {
         self.slider = $('.bxslider').bxSlider({
             swipeThreshold: 100,
             controls: false,
@@ -50,8 +51,15 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
             date = dayRange[startIndexOfDayRange];
             $(this).find('.day_of_week').text(date.format("ddd"));
             $(this).find('.date_of_month').text(date.date());
+            $(this).attr("data-date", date.format("YYYY-MM-DD"));
             startIndexOfDayRange++
         });
+    };
+
+    this.__emphasizeToday = function () {
+        var today = moment().format("YYYY-MM-DD");
+        $('.day_list').find('li').removeClass('active');
+        $('.day_list').find("li[data-date='"+ today+"']").addClass('active');
     };
 
     this.__populateDateForThreeWeekLists = function () {
@@ -67,6 +75,7 @@ app.service("WeekdaysService", ["$templateCache", function ($templateCache) {
             this.__increaseShowingWeek();
         }
         this.__rePopulateDateForNextAndPrevWeek($slideElement);
+        this.__emphasizeToday();
     };
 
     this.__rePopulateDateForNextAndPrevWeek = function ($slideElement) {

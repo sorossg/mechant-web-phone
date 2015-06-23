@@ -32,6 +32,7 @@ var app = null;
         'js/services/i18nService',
         'js/services/AjaxService',
         'js/services/ShopResourceService',
+        'js/services/PopupService',
 
         'js/appointment/AppointmentController.js',
         'js/appointment/WeekdaysService.js'
